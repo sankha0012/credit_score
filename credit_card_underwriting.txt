@@ -1,0 +1,443 @@
+Credit Underwriting: A Feature-Driven, Behavioral
+Perspective
+
+Introduction
+When people talk about “underwriting models,” they often imagine black-box machine learning
+systems. In practice, strong underwriting is far less about exotic algorithms and far more about
+choosing the right features, understanding what they imply about human behavior,
+and deploying models that can evolve as customer behavior evolves.
+The objective is not to perfectly predict default. The objective is to:
+• control early risk,
+• learn rapidly from behavior,
+• expand access safely for thin-file customers, and
+• prevent non-performing loans before they form.
+This document explains the underwriting feature set in a narrative, example-driven way so
+that it can be quickly grasped without technical deep dives.
+We divide features into:
+1. Easily available features (“low-hanging fruits”)
+2. Features that require future partnerships (covered in Part II)
+
+1. Easily Available Features (Low-Hanging Fruits)
+These features rely primarily on transactional visibility, card usage data, and basic digital
+signals. On their own, they are sufficient to build a strong first underwriting engine, especially
+for customers with limited credit bureau history.
+
+A. Transaction Behavior: The Most Honest Data
+Transaction behavior reflects revealed preferences rather than self-reported information. It is
+often more reliable than declared income or demographic attributes.
+
+1
+
+1. Spend Regularity
+Definition: The consistency of a customer’s total spending over time.
+Example:
+• Customer A spends OMR 200–250 every month.
+• Customer B spends OMR 50 one month, OMR 700 the next, and nothing the month after.
+Interpretation:
+• High regularity indicates stable cash flow.
+• High volatility indicates liquidity stress or income uncertainty.
+In practice, spend regularity is often more predictive of short-term default risk than income
+level itself.
+2. Spend Frequency vs Ticket Size
+Definition: The balance between many small transactions and a few large transactions.
+Example:
+• Frequent groceries, fuel, and food purchases.
+• Rare but very large electronics or travel purchases.
+Interpretation:
+• Frequent small transactions reflect lifestyle spending and self-regulation.
+• Large, infrequent transactions are more sensitive to income shocks.
+3. Merchant Diversity Index
+Definition: The number and variety of merchant categories a customer transacts with.
+Example:
+• Narrow diversity: only food delivery and ride-hailing.
+• Broad diversity: groceries, utilities, healthcare, retail, dining.
+Interpretation:
+• Broad diversity suggests integration into the daily economy.
+• Narrow diversity may indicate situational or lifestyle dependence.
+This is a powerful alternative data signal that works even when credit bureau data is thin.
+
+2
+
+4. Essential vs Discretionary Spend Ratio
+Definition: The proportion of spending on necessities versus optional categories.
+Interpretation:
+• Some discretionary spending indicates comfort and flexibility.
+• Extremely high discretionary spend relative to income signals risk.
+• Extremely low discretionary spend indicates vulnerability to shocks.
+Healthy borrowers typically exhibit a balanced mix rather than extremes.
+
+B. Payment Behavior: Early Warning Signals
+Payment behavior often changes before delinquency appears. These features are critical for
+proactive risk control.
+5. Payment Timing Drift
+Definition: Changes in how early or late a customer makes payments relative to the due date.
+Example:
+• Previously paid 10 days before due date.
+• Now pays exactly on due date or slightly late.
+Interpretation: This indicates tightening liquidity even if payments are still technically
+on time.
+6. Payment Compression
+Definition: A gradual shift from full payment to near-full payment to minimum payment.
+Interpretation:
+• The customer is not yet delinquent.
+• Financial stress is increasing.
+Detecting this early allows for low-cost interventions before default risk escalates.
+
+C. Credit Utilization Dynamics
+Static utilization levels are less informative than how utilization changes over time.
+7. Utilization Slope
+Definition: The rate at which credit utilization is increasing.
+Example:
+• Gradual increase from 30% to 40%.
+• One-time spike to 70% followed by normalization.
+3
+
+Interpretation:
+• A steady climb suggests structural stress.
+• A one-off spike suggests a temporary event.
+The slope is often more predictive than the level.
+8. Balance Persistence
+Definition: How long elevated balances remain outstanding.
+Interpretation:
+• Persistent balances indicate revolving behavior.
+• Short-lived balances indicate controlled borrowing.
+
+D. App and Digital Behavior
+Digital interaction patterns provide insight into financial awareness and intent.
+9. Statement-Day Engagement
+Definition: Whether the customer opens the app around statement generation.
+Interpretation:
+• High engagement suggests awareness and control.
+• Avoidance correlates with higher default risk.
+10. Feature Exploration
+Definition: Interaction with features such as payment options, installment simulations, or
+credit limit views.
+Interpretation:
+• Indicates planning and financial engagement.
+• Correlates with lower surprise risk.
+
+E. Identity and Stability Signals
+11. Device Stability
+Definition: Frequency of device changes or consistent device usage.
+Interpretation:
+• Stable device usage indicates lower fraud and credit risk.
+• High churn increases uncertainty.
+
+4
+
+12. Geographic Consistency
+Definition: Transactions clustered in predictable locations.
+Interpretation:
+• Indicates local stability and predictable lifestyle patterns.
+
+Closing Note for Part I
+These low-hanging features already allow underwriting based on behavior rather than history.
+They are explainable, regulator-friendly, and effective even when traditional credit data is limited.
+Part II will extend this framework to partnership-driven alternative data (open banking, telecom, utilities, merchant platforms) and explain how these features integrate into short-horizon
+underwriting models.
+
+2. Features Requiring Future Partnerships (High-Impact Signals)
+While the features described in Part I are sufficient to build a strong underwriting foundation,
+the long-term competitive advantage comes from incorporating consented, ecosystem-level
+alternative data. These features are not required on day one, but they significantly improve
+approval accuracy, credit limit sizing, and early-risk detection once partnerships mature.
+Importantly, these signals are most valuable for:
+• thin-file or new-to-credit customers,
+• early-stage portfolio expansion, and
+• preventing non-performing loans through early detection.
+
+A. Open Banking and Bank Account Data
+Open banking data provides direct visibility into cash-flow reality, which no credit bureau score
+can fully capture.
+13. Salary Periodicity Confidence
+Definition: The regularity and predictability of income deposits into a bank account.
+Example:
+• Monthly salary of similar amount from the same source.
+• Irregular deposits of varying size and timing.
+Interpretation:
+• High periodicity implies stable repayment capacity.
+• Irregular income requires tighter credit controls.
+In practice, salary periodicity is often more informative than stated income.
+5
+
+14. Post-Essentials Cash Surplus
+Definition: Income remaining after recurring essential expenses.
+Interpretation:
+• Captures true affordability.
+• Supports safe credit limit sizing.
+Two customers with identical income may have radically different surplus, and therefore
+radically different risk profiles.
+15. Low-Balance and Overdraft Frequency
+Definition: How often bank balances approach zero or enter overdraft.
+Interpretation:
+• Frequent low balances indicate fragile liquidity.
+• Such customers are more sensitive to shocks.
+This feature is especially powerful for short-horizon (30–90 day) risk prediction.
+—
+
+B. Telecom and Utility Data (With Explicit Consent)
+Telecom and utility data are among the strongest alternative signals globally, particularly for
+customers with limited formal credit history.
+16. Bill Payment Regularity
+Definition: On-time versus late payments for telecom or utility bills.
+Interpretation:
+• Reflects habitual financial discipline.
+• Strong predictor of credit repayment behavior.
+These signals are particularly effective for first-time borrowers.
+17. Tenure Stability
+Definition: Length of time a customer has maintained the same phone number or utility
+account.
+Interpretation:
+• Longer tenure indicates social and economic rootedness.
+• Short tenure may reflect instability or recent disruption.
+This feature also complements fraud prevention efforts.
+—
+
+6
+
+C. Merchant and Platform Partnerships
+Large merchants and platforms hold behavioral data that is highly predictive when used responsibly.
+18. Refund and Dispute Frequency
+Definition: Frequency of transaction reversals, refunds, or disputes.
+Interpretation:
+• High rates may indicate poor financial planning or stress.
+• In some cases, elevated fraud risk.
+This signal often correlates with unstable spending behavior.
+19. Subscription Stack Density
+Definition: Number of recurring subscription commitments.
+Interpretation:
+• High fixed obligations reduce financial flexibility.
+• Important for affordability assessment.
+Subscriptions behave like hidden fixed expenses.
+20. Employer-Linked Spend Alignment
+Definition: Spending patterns aligned with known salary cycles or employer payment schedules.
+Interpretation:
+• Indicates predictable cash-flow rhythm.
+• Reduces uncertainty in repayment timing.
+—
+
+D. Network, Social, and Ecosystem-Derived Signals
+Beyond individual behavior, credit risk is often influenced by a customer’s position within
+broader economic and social networks. These features capture second-order effects that are
+difficult to fake and slow to change.
+21. Peer Stability Index
+Definition: An aggregated stability measure derived from the behavior of customers with
+similar transaction and merchant patterns.
+Interpretation:
+• Customers embedded in stable peer groups tend to remain stable.
+
+7
+
+• Sudden divergence from peer behavior can indicate emerging stress.
+This feature does not require explicit social data; it emerges naturally from transaction
+similarity graphs.
+22. Merchant Network Health
+Definition: The financial health of the merchant ecosystem a customer interacts with, inferred
+from aggregate transaction trends.
+Interpretation:
+• Customers concentrated in declining merchant clusters may face indirect income risk.
+• Exposure to resilient merchant networks correlates with lower default rates.
+This captures economic context without requiring employer-level data.
+—
+
+E. Temporal and Shock-Response Features
+These features measure how customers respond to stress, rather than whether stress exists.
+23. Spend Shock Absorption Capacity
+Definition: The ability of a customer to absorb unexpected large expenses without persistent
+balance deterioration.
+Example:
+• Large medical or travel expense followed by normalization.
+• Large expense followed by sustained minimum payments.
+Interpretation:
+• High absorption capacity indicates financial resilience.
+• Low capacity suggests fragility even if income appears adequate.
+This feature distinguishes temporary stress from structural weakness.
+24. Recovery Velocity
+Definition: The speed with which utilization and payment behavior return to baseline after a
+disruption.
+Interpretation:
+• Fast recovery implies adaptability.
+• Slow recovery increases probability of long-term delinquency.
+Recovery velocity is often more predictive than the size of the initial shock.
+—
+
+8
+
+F. Behavioral Consistency and Predictability
+Predictability itself is a form of creditworthiness.
+25. Behavioral Entropy
+Definition: A measure of randomness in spending, payment, and engagement patterns over
+time.
+Interpretation:
+• Low entropy reflects structured, planned behavior.
+• High entropy correlates with higher operational and credit risk.
+This feature captures instability that is not visible in averages.
+26. Habit Formation Strength
+Definition: The degree to which spending and payment behaviors repeat on predictable schedules.
+Interpretation:
+• Strong habits indicate lower surprise risk.
+• Weak habits imply sensitivity to external shocks.
+Habit strength is particularly useful for early-stage customers.
+—
+
+G. Forward-Looking Exposure Signals
+These features anticipate future stress rather than reacting to past behavior.
+27. Commitment Load Projection
+Definition: Projected fixed obligations based on observed subscription growth, installment
+adoption, and recurring payments.
+Interpretation:
+• Rising commitment load reduces future flexibility.
+• Important for proactive credit limit management.
+This treats commitments as future liabilities, not current ones.
+28. Credit Elasticity Under Stress
+Definition: Observed change in spending behavior when available credit tightens slightly.
+Interpretation:
+• Elastic response suggests discretionary usage.
+• Inelastic response suggests dependence on credit.
+This feature is invaluable for distinguishing healthy revolvers from distressed borrowers.
+—
+9
+
+Why These Advanced Features Matter
+These additional features:
+• are difficult to manipulate,
+• evolve slowly over time,
+• capture resilience rather than snapshots,
+• and allow risk management to be proactive rather than reactive.
+
+Final Strategic Insight
+The most dangerous credit risk is not low income or high utilization. It is fragility
+— the inability to absorb shocks and recover.
+
+H. Non-Transactional Alternative Data Signals
+Transaction data is powerful, but it reflects behavior after money is spent. The strongest
+underwriting systems complement it with alternative data that captures stability, obligations,
+intent, and resilience outside the card itself.
+These signals are especially valuable for thin-file customers and early-stage portfolios.
+29. Income Source Concentration
+Definition: The number and consistency of income sources inferred from bank inflows or
+employer-linked payments.
+Interpretation:
+• Single, stable income source implies predictability.
+• Multiple volatile sources increase uncertainty.
+This feature helps distinguish diversified resilience from income instability.
+—
+30. Income Volatility Index
+Definition: Variance of income inflows over time, normalized by mean income.
+Interpretation:
+• Low volatility supports higher safe credit limits.
+• High volatility necessitates tighter exposure control.
+Income volatility is often more informative than income level.
+—
+
+10
+
+31. Fixed Obligation Burden
+Definition: Share of income pre-committed to fixed obligations such as rent, utilities, telecom,
+insurance, or loan EMIs.
+Interpretation:
+• High fixed burden reduces flexibility under stress.
+• Low burden increases shock absorption capacity.
+This is a forward-looking affordability signal rather than a backward-looking one.
+—
+32. Rent and Housing Stability Proxy
+Definition: Consistency of housing-related payments or address tenure inferred from utilities
+or banking data.
+Interpretation:
+• Stable housing correlates strongly with lower default risk.
+• Frequent changes indicate disruption or transition.
+Housing stability is one of the strongest predictors of long-term financial health globally.
+—
+33. Telecom Usage Stability
+Definition: Continuity of mobile number usage, plan type consistency, and payment regularity.
+Interpretation:
+• Long-tenure numbers with consistent plans indicate rootedness.
+• Frequent churn correlates with instability and higher risk.
+Telecom data is particularly valuable for customers with limited formal credit history.
+—
+34. Digital Identity Continuity
+Definition: Consistency across identity-linked digital touchpoints (devices, accounts, authentication patterns).
+Interpretation:
+• High continuity indicates low impersonation and fraud risk.
+• Fragmentation increases both fraud and credit uncertainty.
+This feature strengthens underwriting and fraud models simultaneously.
+—
+
+11
+
+35. Employment Sector Risk Proxy
+Definition: Exposure to economic sectors with differing volatility, inferred from employerlinked inflows or merchant clusters.
+Interpretation:
+• Employment in stable sectors implies smoother income.
+• Cyclical sectors require conservative limit management.
+This allows macro-aware underwriting without explicit employer data.
+—
+36. Life-Event Transition Indicators
+Definition: Patterns suggesting major life transitions such as relocation, job change, or household formation.
+Examples:
+• Sudden geography shift.
+• Temporary income interruption followed by normalization.
+Interpretation:
+• Transitions increase short-term risk.
+• But successful stabilization afterward is a strong positive signal.
+These features help distinguish transient stress from chronic fragility.
+—
+37. Financial Planning Intent Signals
+Definition: Explicit or implicit signals of planning intent, such as budgeting tool usage or
+proactive data sharing.
+Interpretation:
+• Planning intent correlates with lower delinquency.
+• Avoidance correlates with surprise defaults.
+Intent-based signals often precede behavioral changes.
+—
+
+I. Why Alternative Data Complements Transactions
+Transaction data answers:
+“What has the customer already done?”
+Alternative data answers:
+“What constraints, obligations, and stability does the customer live with?”
+12
+
+Together, they allow underwriting models to:
+• separate capacity from behavior,
+• identify fragility before delinquency,
+• and safely extend credit to customers who would otherwise be excluded.
+
+Extended Executive Insight
+Transactions show taste. Alternative data shows resilience. Good underwriting
+needs both.
+
+How These Features Are Used in Models
+Despite the richness of these signals, the modeling approach remains deliberately simple and
+robust.
+
+Modeling Philosophy
+• Start with explainable models (logistic regression, gradient-boosted trees).
+• Focus on short-horizon risk (30–90 days), not lifetime prediction.
+• Update predictions continuously as new behavior arrives.
+The sophistication lies in feature design and monitoring, not black-box complexity.
+
+Living Underwriting Score
+All features feed into a dynamic internal score that:
+• updates as behavior changes,
+• supports dynamic credit limit management,
+• enables early intervention before delinquency.
+This score is designed to complement, not replace, external bureau data.
+—
+
+Why This Matters Strategically
+Together, low-hanging and partnership-driven features allows the issuer to:
+• approve more customers safely,
+• size credit limits more accurately,
+• reduce non-performing loans,
+• and build trust with regulators through explainability.
+Most importantly, underwriting becomes a learning system rather than a one-time gate.
+13
+
+Executive Summary
+Good underwriting is not about predicting default perfectly. It is about understanding stability, regularity, and early stress — and responding before problems
+escalate.
+
+14
+
+
